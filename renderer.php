@@ -31,11 +31,26 @@ class block_mystats_renderer extends plugin_renderer_base {
         $statistics = $dashboard->statistics;
         //echo '<pre>' . print_r($statistics, true) . '</pre>';
 
-        $perc_viewed = round(100 * ($statistics->viewcount / $statistics->totalvideos));
-        $perc_diems = round(100 * ($statistics->dmearned / $statistics->totaldiems));
-        $perc_quizzes = round(100 * ($statistics->quizzes / $statistics->totalquizzes));
-        $perc_time = round(100 * ($statistics->timeviewed / $statistics->totaltime));
-
+        if ($statistics->viewcount == 0) {
+            $perc_viewed = 0;
+        } else {
+            $perc_viewed = round(100 * ($statistics->viewcount / $statistics->totalvideos));
+        }
+        if ($statistics->dmearned == 0) {
+            $perc_diems = 0;
+        } else {
+            $perc_diems = round(100 * ($statistics->dmearned / $statistics->totaldiems));
+        }
+        if ($statistics->quizzes == 0) {
+            $perc_quizzes = 0;
+        } else {
+            $perc_quizzes = round(100 * ($statistics->quizzes / $statistics->totalquizzes));
+        }
+        if ($statistics->timeviewed == 0) {
+            $perc_time = 0;    
+        } else {
+            $perc_time = round(100 * ($statistics->timeviewed / $statistics->totaltime));
+        }
         $output = '
         <div class="statistics">
             <div id="pie-charts" class="row dm-bluegreen">
