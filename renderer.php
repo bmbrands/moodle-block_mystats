@@ -29,28 +29,7 @@ class block_mystats_renderer extends plugin_renderer_base {
 
     public function statistics($dashboard) {
         $statistics = $dashboard->statistics;
-        //echo '<pre>' . print_r($statistics, true) . '</pre>';
 
-        if ($statistics->viewcount == 0) {
-            $perc_viewed = 0;
-        } else {
-            $perc_viewed = round(100 * ($statistics->viewcount / $statistics->totalvideos));
-        }
-        if ($statistics->dmearned == 0) {
-            $perc_diems = 0;
-        } else {
-            $perc_diems = round(100 * ($statistics->dmearned / $statistics->totaldiems));
-        }
-        if ($statistics->quizzes == 0) {
-            $perc_quizzes = 0;
-        } else {
-            $perc_quizzes = round(100 * ($statistics->quizzes / $statistics->totalquizzes));
-        }
-        if ($statistics->timeviewed == 0) {
-            $perc_time = 0;    
-        } else {
-            $perc_time = round(100 * ($statistics->timeviewed / $statistics->totaltime));
-        }
         $output = '
         <div class="statistics">
             <div id="pie-charts" class="row dm-bluegreen">
@@ -59,29 +38,46 @@ class block_mystats_renderer extends plugin_renderer_base {
                     <div class="clearfix"></div>
                     
                     <div class="text-center p-20">
-                        <div class="easy-pie main-pie" data-percent="'.$perc_viewed.'">
-                            <div class="percent">'.$perc_viewed.'</div>
+                        <div class="easy-pie main-pie" >
+                            <div class="percent counter">'.$statistics->viewcount.'</div>
                             <div class="pie-title">Videos Viewed</div>
+                            <div class="circle"></div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="p-t-20 p-b-20 m-t-25 text-left col-sm-6">
-                    <div class="text-center easy-pie sub-pie-1" data-percent="'.$perc_diems.'">
-                        <div class="percent">'.$perc_diems.'</div>
+                    <div class="text-center easy-pie sub-pie-1" >
+                        <div class="percent counter">'.$statistics->dmearned.'</div>
                         <div class="pie-title">Diems earned</div>
+                        <div class="circle"></div>
                     </div>
-                    <div class="text-center easy-pie sub-pie-2" data-percent="'.$perc_time.'">
-                        <div class="percent">'.$perc_time.'</div>
+                    <div class="text-center easy-pie sub-pie-2" >
+                        <div class="percent">'.$this->secondsToTime($statistics->timeviewed).'</div>
                         <div class="pie-title">Time viewed</div>
+                        <div class="circle"></div>
                     </div>
-                    <div class="text-center easy-pie sub-pie-3" data-percent="'.$perc_quizzes.'">
-                        <div class="percent">'.$perc_quizzes.'</div>
+                    <div class="text-center easy-pie sub-pie-3">
+                        <div class="percent counter">'.$statistics->quizzes.'</div>
                         <div class="pie-title">Quizzes completed</div>
+                        <div class="circle"></div>
                     </div>
                 </div>
             </div>
         </div>';
         return $output;
     }
+
+    function secondsToTime($seconds) {
+        $dtF = new DateTime("@0");
+        $dtT = new DateTime("@$seconds");
+        if ($seconds > (60 * 60 * 24)) {
+            return $dtF->diff($dtT)->format('%a d: %hh: %i m');
+        } else if ( $seconds > (60 * 60)) {
+            return $dtF->diff($dtT)->format('%hh %im');
+        } else {
+            return $dtF->diff($dtT)->format('%i min');
+        }
+    }
 }
+

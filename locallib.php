@@ -140,15 +140,3 @@ function block_mystats_get_statistics($courses) {
 
     return $statistics;
 }
-
-function secondsToTime($seconds) {
-    $dtF = new DateTime("@0");
-    $dtT = new DateTime("@$seconds");
-    if ($seconds > (60 * 60 * 24)) {
-        return $dtF->diff($dtT)->format('%a days, %h hours, %i minutes and %s seconds');
-    } else if ( $seconds > (60 * 60)) {
-        return $dtF->diff($dtT)->format('%h hours, %i minutes and %s seconds');
-    } else {
-        return $dtF->diff($dtT)->format('%i minutes and %s seconds');
-    }
-}
