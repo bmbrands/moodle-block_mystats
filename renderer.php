@@ -33,7 +33,7 @@ class block_mystats_renderer extends plugin_renderer_base {
         $output = '
         <div class="statistics">
             <div id="pie-charts" class="row dm-bluegreen">
-                <div class=" col-sm-6">
+                <div class=" col-sm-5">
                     
                     <div class="clearfix"></div>
                     
@@ -46,7 +46,7 @@ class block_mystats_renderer extends plugin_renderer_base {
                     </div>
                 </div>
                 
-                <div class="p-t-20 p-b-20 m-t-25 text-left col-sm-6">
+                <div class="p-t-20 p-b-20 m-t-25 text-center col-sm-7">
                     <div class="text-center easy-pie sub-pie-1" >
                         <div class="percent counter">'.$statistics->dmearned.'</div>
                         <div class="pie-title">Diems earned</div>
