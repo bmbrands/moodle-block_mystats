@@ -39,8 +39,8 @@ class block_mystats_renderer extends plugin_renderer_base {
                     
                     <div class="text-center p-20">
                         <div class="easy-pie main-pie" >
-                            <div class="percent counter">'.$statistics->viewcount.'</div>
-                            <div class="pie-title">Videos Viewed</div>
+                            <div class="percent counter">'.$statistics->dmearned.'</div>
+                            <div class="pie-title">Diems earned</div>
                             <div class="circle"></div>
                         </div>
                     </div>
@@ -48,8 +48,8 @@ class block_mystats_renderer extends plugin_renderer_base {
                 
                 <div class="p-t-20 p-b-20 m-t-25 text-center col-sm-7">
                     <div class="text-center easy-pie sub-pie-1" >
-                        <div class="percent counter">'.$statistics->dmearned.'</div>
-                        <div class="pie-title">Diems earned</div>
+                        <div class="percent counter">'.$statistics->viewcount.'</div>
+                        <div class="pie-title">Videos Viewed</div>
                         <div class="circle"></div>
                     </div>
                     <div class="text-center easy-pie sub-pie-2" >
